@@ -26,6 +26,11 @@ type Quotient = {
     numerator: Expression,
     denominator: Expression,
 }
+type Modulo = {
+    kind: "modulo",
+    numerator: Expression,
+    denominator: Expression,
+}
 type Not = {
     kind: "not",
     arg: Expression
@@ -44,6 +49,17 @@ type Greater = {
     left: Expression,
     right: Expression
 }
+type Equal = {
+    kind: "equal",
+    left: Expression,
+    right: Expression,
+}
+type Ternary = {
+    kind: "ternary",
+    condition: Expression,
+    true: Expression,
+    false: Expression,
+}
 type LiteralNumber = {
     kind: "number",
     value: number
@@ -57,6 +73,6 @@ type LiteralBool = {
     value: boolean
 }
 type Literal = LiteralNumber | LiteralString | LiteralBool
-type Expression = Call | Sum | Product | Quotient | Not | Literal | VarRef | Less | Greater
+type Expression = Call | Sum | Product | Quotient | Not | Literal | VarRef | Less | Greater | Equal | Modulo | Ternary
 
 export type { Program, While, Assign, Statement, Call, Sum, Product, Quotient, Not, VarRef, LiteralString, LiteralNumber, LiteralBool, Expression }

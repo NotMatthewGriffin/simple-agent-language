@@ -37,7 +37,7 @@ function evalExpression(expression: Expression, funcs: functions, vars: variable
             return expression.value
         case "call":
             const func = funcs[expression.name];
-            if (!func){
+            if (!func) {
                 throw Error(`Function: ${expression.name} is undefined`)
             }
             return func(...expression.args.map((arg) => evalExpression(arg, funcs, vars)));
@@ -51,7 +51,7 @@ function evalExpression(expression: Expression, funcs: functions, vars: variable
             return sum;
         case "product":
             let product = 1;
-            for (const factor of expression.factors){
+            for (const factor of expression.factors) {
                 product *= evalExpression(factor, funcs, vars);
             }
             return product;
@@ -65,5 +65,9 @@ function evalExpression(expression: Expression, funcs: functions, vars: variable
             return evalExpression(expression.left, funcs, vars) < evalExpression(expression.right, funcs, vars);
         case "greater":
             return evalExpression(expression.left, funcs, vars) > evalExpression(expression.right, funcs, vars);
+        case "equal":
+            return evalExpression(expression.left, funcs, vars) == evalExpression(expression.right, funcs, vars);
+        case "modulo":
+            return evalExpression(expression.numerator, funcs, vars) % evalExpression(expression.denominator, funcs, vars);
     }
 }
